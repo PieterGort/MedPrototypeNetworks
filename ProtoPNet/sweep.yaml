@@ -1,0 +1,98 @@
+program: train_and_test.py
+method: bayes
+project: VinDrMammo
+metric:
+  name: val/AUROC
+  goal: maximize
+
+parameters:
+  coefs:
+    parameters:
+      l1:
+        distribution: uniform
+        min: 0.00005
+        max: 0.0002
+      sep:
+        distribution: uniform
+        min: -0.16
+        max: -0.04
+      clst:
+        distribution: uniform
+        min: 0.4
+        max: 1.6
+      crs_ent:
+        distribution: int_uniform
+        min: 1
+        max: 2
+  push_start:
+    distribution: int_uniform
+    min: 5
+    max: 22
+  num_workers:
+    distribution: int_uniform
+    min: 4
+    max: 36
+  weight_decay:
+    distribution: uniform
+    min: 0.00005
+    max: 0.0002
+  num_warm_epochs:
+    distribution: int_uniform
+    min: 3
+    max: 10
+  test_batch_size:
+    distribution: int_uniform
+    min: 32
+    max: 256
+  gammaLRscheduler:
+    distribution: uniform
+    min: 0.25
+    max: 2
+  num_train_epochs:
+    distribution: int_uniform
+    min: 25
+    max: 120
+  train_batch_size:
+    distribution: int_uniform
+    min: 16
+    max: 256
+  joint_lr_step_size:
+    distribution: int_uniform
+    min: 3
+    max: 20
+  warm_optimizer_lrs:
+    parameters:
+      add_on_layers:
+        distribution: uniform
+        min: 0.00005
+        max: 0.006
+      prototype_vectors:
+        distribution: uniform
+        min: 0.00005
+        max: 0.006
+  joint_optimizer_lrs:
+    parameters:
+      features:
+        distribution: uniform
+        min: 5e-7
+        max: 0.0002
+      add_on_layers:
+        distribution: uniform
+        min: 0.00005
+        max: 0.006
+      prototype_vectors:
+        distribution: uniform
+        min: 0.00005
+        max: 0.006
+  last_layer_iterations:
+    distribution: int_uniform
+    min: 10
+    max: 40
+  train_push_batch_size:
+    distribution: int_uniform
+    min: 16
+    max: 256
+  last_layer_optimizer_lr:
+    distribution: uniform
+    min: 0.00005
+    max: 0.002
